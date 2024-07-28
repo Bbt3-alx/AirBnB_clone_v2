@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-# Start a web application
+"""Start a web application"""
 
 
 from flask import Flask, render_template
