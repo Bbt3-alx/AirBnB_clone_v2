@@ -1,3 +1,5 @@
+"""Database storage"""
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from models.base_model import Base
@@ -9,6 +11,7 @@ from models.amenity import Amenity
 from models.review import Review
 
 class DBStorage:
+    """Class Db storage"""
     __engine = None
     __session = None
 

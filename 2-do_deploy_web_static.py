@@ -2,7 +2,8 @@
 """A script that distributes an archive to a web server"""
 
 
-from fabric import Connection, task
+from fabric import *
+from fabric.api import *
 import os
 
 
@@ -13,12 +14,13 @@ env_user = 'ubuntu'
 @task
 def do_deploy(archive_path):
     """Distributes an archive to the web server"""
+
     if not os.path.exists("archive_path"):
-         return False
-    
+        return False
+
     try:
         c.put(archive_path, '/tmp/')
-        
+
         # Create the release folder
         archive_name = os.path.basename(archive_path)
         archive_base = os.path.splitext(archive_name)[0]
@@ -29,7 +31,8 @@ def do_deploy(archive_path):
             connection.sudo(f'mkdir -p {release_folder}')
 
             # Uncompress the archive
-            connection.sudo(f'tar -xzf /tmp/{archive_path} -C /data/web_static/releases/')
+            release = "/data/web_static/releases/"
+            connection.sudo(f'tar -xzf /tmp/{archive_path} -C {release}')
 
             # Delete the archive from the web server
             connection.sudo(f'rm /tmp/{archive_path}')
