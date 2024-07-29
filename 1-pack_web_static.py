@@ -18,7 +18,6 @@ def do_pack():
     FILENAME = datetime.now().strftime("%Y%m%d%H%M%S")
     ARCHIVE_PATH = f'versions/web_static_{FILENAME}.tgz'
 
-
     result = local(f'tar -czf {ARCHIVE_PATH} web_static')
 
     if result.failed:
